@@ -55,7 +55,7 @@ analysis. The script containing the reduced model and the simulation can be foun
 
 ##########################################################################################################
 The simulation results I used for the plots in the Thesis are named according to the parameter changes
-made to the standard configuration which is contained in the antimony txt file. A more detailed description
+made to the standard configuration contained in the antimony txt file. A more detailed description
 is provided in the excel sheet simulation_datasets_desc.xslx.
 
 
