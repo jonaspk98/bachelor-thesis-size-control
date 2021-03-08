@@ -1,0 +1,82 @@
+model whi3_stress(stress, V, dV)
+    pS=0
+    with_stress = 1// 1 with stress, 0 plain
+    stress = 0 
+    V = 20
+    dV=0
+    
+    // hill kinetics for stressdependent phosphorylation rate of Whi3P
+    n = 10
+    K_hill = 1.5e6
+    
+    //rate constants
+    kpCln3h = 0.0
+    kpCln3 = kpCln3h * pS + (0.005 * with_stress + 0.003 *(1-with_stress))*(1-pS) // adjustment of Cln3 production
+    kdCln3 = 0.0039
+    kasSW = 1.67
+    kdisSW = 1.67e-4
+    kPhWhi3 := 9e-2/(1+(K_hill/stress)^n)
+    kDphWhi3 = 1e-4
+    kPhWhi5 = 1e-3
+    kDphWhi5 = 5e-4
+    kpCln12 = 0.087
+    kdCln12 = 0.0015
+    
+    
+    
+    kdil=1
+    
+    kPh := kPhWhi5*(Cln12+Cln3)
+    //totals
+    Whi5 = Whi5h
+    Whi5h = Whi50 * pS + Whi50 * (1-pS)
+    //initials
+    Cln3 = Cln30
+    Cln12 = Cln30
+    Whi3h = 5*V*pS + Whi30 *(1-pS)
+    Whi3 = Whi3h
+    Whi3P = Whi3P0
+    Sbfh = 1.1*V*pS + Sbf0 * (1-pS)
+    Sbf = Sbfh
+    Whi5Sbf=Whi5Sbf0
+    Whi5P=Whi5P0
+    //initials
+    Cln30 = 0.0
+    Cln120 = 0.0
+    Whi30=0.0
+    Whi3P0=0.0
+    Whi50=65
+    Whi5Sbf0=0.0
+    Whi5P0=0.0
+    Sbf0=0.0
+    
+    //defined totals:
+    Sbft := Sbf + Whi5Sbf
+    Whi3t := Whi3P+Whi3
+    Whi5t:=Whi5+Whi5P+Whi5Sbf
+    Sbf_ac := Sbf / Sbft
+    
+    inhi_term := 1/(1+Whi3/V)*with_stress + 1*(1-with_stress) 
+    
+    Cln3' =  - kdCln3*Cln3 + kpCln3*V * inhi_term
+    Whi3' = -kPhWhi3/V*Whi3 + kDphWhi3*Whi3P + Whi3t/V*dV
+    Whi3P' = kPhWhi3/V*Whi3 - kDphWhi3*Whi3P
+    Cln12' = kpCln12*V*Sbf/Sbft - kdCln12*Cln12
+    
+    Sbf' =  - (kasSW/V*Whi5)*Sbf + (kdisSW + kPh/V)*Whi5Sbf + Sbft/V*dV
+    Whi5' = - (kasSW*Sbf+kPh)/V*Whi5 + kdisSW*Whi5Sbf + kDphWhi5*Whi5P // Whi5t/(kdil*V)*dV 
+    Whi5P' = kPh/V*(Whi5+Whi5Sbf) - kDphWhi5*Whi5P
+    Whi5Sbf' = kasSW/V*Sbf*Whi5 - (kdisSW+kPh/V)*Whi5Sbf 
+    
+    //concentrations
+    cCln3 := Cln3/V
+    cWhi3 := Whi3/V
+    cWhi3P := Whi3P/V
+    cCln12 := Cln12/V
+    cSbf := Sbf/V
+    cWhi5 := Whi5/V
+    cWhi5P := Whi5P/V
+    cWhi5Sbf := Whi5Sbf/V
+    cWhi5t := Whi5t/V
+    cSbft := Sbft/V
+end 

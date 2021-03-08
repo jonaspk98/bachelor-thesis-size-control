@@ -1,0 +1,7 @@
+#ignore
+*.pyc
+*.ini
+.spyproject
+venv
+*.xml
+data_sets

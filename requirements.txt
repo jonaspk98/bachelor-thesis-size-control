@@ -1,0 +1,8 @@
+matplotlib~=3.3.4
+pandas~=1.2.2
+numpy~=1.19.3
+scipy~=1.5.4
+tellurium~=2.2.0
+libroadrunner
+PyDSTool~=0.91.0
+requests~=2.25.1

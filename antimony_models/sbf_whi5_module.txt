@@ -1,0 +1,27 @@
+model sbf_module()
+    V = 20
+    Cln3 = 1.1
+
+    kasSW = 1.67
+    kdisSW = 1.67e-4
+
+    kPhWhi5 = 1e-3
+    kDphWhi5 = 5e-4
+    fac=58
+    kdCln12 = 0.0015
+    
+    
+    kPh := kPhWhi5*(Cln12+Cln3)
+    Sbf = 1.1
+    Whi5P = 0.0
+    Cln12 = 0
+    Whi50=65
+    
+    Sbft := 1.1
+    Whi5t:= Whi50/V
+    
+    Cln12' = kdCln12*fac*Sbf/Sbft - kdCln12*Cln12
+    Sbf' =  - kasSW*(Whi5t+Sbf-Sbft-Whi5P)*Sbf + (kdisSW + kPh)*(Sbft-Sbf)
+    Whi5P' = kPh*(Whi5t-Whi5P) - kDphWhi5*Whi5P
+    
+end 
