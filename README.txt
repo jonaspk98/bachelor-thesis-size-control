@@ -1,6 +1,6 @@
 G1 size control in yeast
 ###############################
-This project contains the scripts which were used for simulations and plots presented in my Bachelor thesis.
+This project contains the scripts that were used for simulations and plots presented in my Bachelor thesis.
 The model is based on the a growth model which which was published in Altenburg et al., 2018, NPJ systems biology and applications.
 
 The Antimony models used in this poroject are in the /antimony_models folder
