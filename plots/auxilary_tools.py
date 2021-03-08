@@ -33,7 +33,7 @@ def get_load_df_fun(base_path: str) -> Callable[[str], pd.DataFrame]:
 
 
 def load_set(name):
-    with open("C:/Users/jonas/Documents/Studium/Studienprojekt/simulation_data/" + name, "rb") as f:
+    with open(os.path.join(config.ROOT_DIR, "simulation_data", "param_scans", name), "rb") as f:
         return pickle.load(f)
 
 

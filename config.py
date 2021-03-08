@@ -19,7 +19,7 @@ GT_RECORD = os.path.join(ROOT_DIR, "data_sets/gt_cell_cycle_dynamics.pkl")
 
 # selection for simulation
 SELECTIONS = ["time", "SN_cCln3", "SN_cWhi3P", "SN_cWhi5", "SN_cCln12", "SN_Sbf_ac", "V_tot_fl", "SN_Sbft", "SN_cSbf",
-              "SN_cWhi5P", "SN_cWhi5Sbf", "SN_cWhi5t", "SN_cSbft"]
+              "SN_cWhi5P", "SN_cWhi5Sbf", "SN_cWhi5t", "SN_cSbft", "stress"]
 # selection to show in plot
 PLOT_SELECTIONS = ["SN_cCln3", "SN_cWhi3P", "SN_cWhi5", "SN_cCln12", "SN_Sbf_ac", "V_tot_fl"]
 # dict for units fo y axis in plots

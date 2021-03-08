@@ -16,7 +16,7 @@ import simulations.simulation_tools.aux_simu_tools as ast
 import simulations.simulation_tools.model_reassignment_tools as mrt
 from plots.vdiv_all_species import get_plot_all_fun
 from simulations.simulation_tools.steady_state_finding import SteadyStateFinder
-
+mpl.use("TkAgg")
 
 def plot_all(scan_res, selections, plot_selections, unit_dict, tt=100):
     plot_all = get_plot_all_fun(selections, plot_selections, unit_dict)
@@ -85,3 +85,4 @@ if __name__ == "__main__":
     param_range = np.linspace(10, 50, 8)
     scan_res = simulate_vscan(param_range, selections, ss_param_dict)
     plot_all(scan_res, selections, plot_selections, sel_unit_dict, tt=100)
+    plt.show()

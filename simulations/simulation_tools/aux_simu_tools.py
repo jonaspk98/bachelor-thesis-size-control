@@ -7,7 +7,7 @@ Created on Fri Nov  6 19:10:18 2020
 
 import numpy as np
 import pandas as pd
-
+import pickle
 
 def vol(r):
     return 4 / 3 * np.pi * r ** 3
@@ -31,3 +31,9 @@ def get_transition_state(res):
 def namedArray_to_df(namedArray, selections):
     data_dict = {sel: namedArray[sel] for sel in selections}
     return pd.DataFrame(data_dict)
+
+
+def save(obj: list, path:str):
+    with open(path, "wb") as f:
+        pickle.dump(obj, f)
+

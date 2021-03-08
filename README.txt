@@ -11,6 +11,8 @@ The Antimony models used in this poroject are in the /antimony_models folder
 -> sbf_whi5_module.txt
     model containing only the interactions of Sbf, Whi5 and Cln12. Is used to calculate steady states
     to initialize the continuation curve in bifurcation analysis.
+-> size_regulation_nodil.txt
+    model which was used for the simulation in which the Whi5 concentration was kept constant.
 
 Different simulations were done:
 ###########################################################################################################
