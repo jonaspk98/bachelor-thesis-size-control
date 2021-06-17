@@ -135,3 +135,5 @@ if __name__ == "__main__":
 
     for ax, let in zip(cb_axes, "abc"):
         ax.text(0.0, 1.8, "({})".format(let), transform=ax.transAxes, fontsize=12)
+
+    plt.show()

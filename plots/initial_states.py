@@ -55,3 +55,5 @@ if __name__ == "__main__":
         ax3.set_yticks([])
         ax3.set_yticklabels([])
         ax3.set_ylabel(lab, fontsize=9)
+
+    plt.show()
