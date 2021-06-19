@@ -42,11 +42,29 @@ def transform_data(scan_results: list) -> pd.DataFrame:
     final_df = pd.DataFrame({"growth_rate": growth_rates, "volume_scans": data_frames})
     return final_df
 
+def make_df(ini_dict):
+    list_of_series = [ini_dict[key].append(pd.Series(index=["initial_volume"], data=[key])) for key in ini_dict]
+    inital_values_df = pd.concat(list_of_series, axis=1).T
+    return inital_values_df
 
-if __name__ == '__main__':
+def get_initial_state_for_kg_vdiv_scan(filenames):
+    load_df_fun = get_load_set_fun("simulation_data/full_kg_vdiv_sets")
+    sim_set_names = filenames
+    sim_sets = [load_df_fun(name) for name in sim_set_names]
+
+    gr1s = [simset[0] for simset in sim_sets]
+
+    ini_dicts = [{res[0]: res[1].iloc[0] for res in results} for results in gr1s]
+    ini_state_dfs = [make_df(ini_dict) for ini_dict in ini_dicts]
+    for ini_state_df, name in zip(ini_state_dfs, ["kg_vdiv_nHill_10", "kg_vdiv_kpCln3_003"]):
+        ini_state_df.to_csv(r"C:\Users\jonas\Development\g1-size-control\simulation_data\initials_states/" + name + "_ini_states.csv")
+
+def transform_kg_vdiv_files():
     load_fun = get_load_set_fun(PATH_DIR)
     for file in os.listdir(os.path.join(config.ROOT_DIR, PATH_DIR)):
         if "kg_vdiv" in file:
             ds = load_fun(file)
             df = transform_data(ds)
             save_df(df, file)
+
+

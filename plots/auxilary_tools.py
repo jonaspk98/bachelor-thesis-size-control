@@ -31,6 +31,11 @@ def get_load_df_fun(base_path: str) -> Callable[[str], pd.DataFrame]:
 
     return load_df
 
+def get_load_df_from_csv(base_path: str) -> Callable[[str], pd.DataFrame]:
+    def load_csv(file_name: str) -> pd.DataFrame:
+        return pd.read_csv(os.path.join(config.ROOT_DIR, base_path, file_name))
+
+    return load_csv
 
 def load_set(name):
     with open(os.path.join(config.ROOT_DIR, "simulation_data", "param_scans", name), "rb") as f:

@@ -7,11 +7,17 @@ Created on Mon Nov 23 17:58:35 2020
 plots initial states used for the growth-rate, initial volumes scans.
 Requires full simulation data which is not provided in Github, since the files are too big.
 """
+from typing import Dict
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
+import pandas as pd
 import plots.auxilary_tools as aux
+
+def make_df(ini_dict):
+    list_of_series = [ini_dict[key].append(pd.Series(index=["initial_volume"], data=[key])) for key in ini_dict]
+    inital_values_df = pd.concat(list_of_series, axis=1).T
+    return inital_values_df
 
 if __name__ == "__main__":
     f = 2
@@ -26,21 +32,17 @@ if __name__ == "__main__":
     mpl.rc('figure', figsize=(6 / 2.54, 12 / 2.54), dpi=300)
     mpl.rc('grid', linewidth=0.8 / 2.54)
 
-    sim_set_names = ["kg_vdiv_nHill_10.pkl", "kg_vdiv_kpCln3_003.pkl"]
-    sim_sets = [aux.load_set(name) for name in sim_set_names]
+    load_df_fun = aux.get_load_df_from_csv("simulation_data/initial_states")
+    ini_state_df_names = ["kg_vdiv_nHill_10_ini_states.csv", "kg_vdiv_kpCln3_003_ini_states.csv"]
+    ini_state_dfs = [load_df_fun(name) for name in ini_state_df_names]
 
-    gr1s = [simset[0] for simset in sim_sets]
-
-    ini_dict = [{res[0]: res[1].iloc[0] for res in results} for results in gr1s]
 
     fig, axes = plt.subplots(2, 1)
-
     markers = ["o", "v", "p"]
     species = ["SN_cWhi5", "SN_cWhi5Sbf", "SN_cSbf"]
-    for ax, idic in zip(axes, ini_dict):
+    for ax, ini_state_df in zip(axes, ini_state_dfs):
         for marker, spec in zip(markers, species):
-            for val in idic:
-                ax.plot(val, idic[val][spec], linestyle="none", marker=marker, color="black")
+            ax.plot(ini_state_df["initial_volume"], ini_state_df[spec], linestyle="none", marker=marker, color="black")
 
     labels = ["Whi5", "Whi5Sbf", "free Sbf"]
     handles = [mpl.lines.Line2D([0], [0], linestyle="none", marker=m, color="black", label=l) for m, l in

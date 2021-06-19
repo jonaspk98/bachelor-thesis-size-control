@@ -67,7 +67,7 @@ def plot_supp(names: list, texts: list, titles: list, figname: str):
 
 def plot_supp_sf():
     names = [["Whi5_50.pkl", "kpCln3_003.pkl", "Whi5_100.pkl"],
-             ["kpCln3_002.pkl", "kpCLn3_003.pkl", "kpCln3_004.pkl"],
+             ["kpCln3_002.pkl", "kpCln3_003.pkl", "kpCln3_004.pkl"],
              ["kpCln3_0003_kd_00039.pkl", "kpCln3_003.pkl", "kpCln3_03_kd_039.pkl"]]
 
     texts = [["$n_0^{Whi5}=50$", "$n_0^{Whi5}=65$", "$n_0^{Whi5}=100$"],
