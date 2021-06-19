@@ -69,4 +69,3 @@ def plot_all_scan(scan_res, selections, plot_selections, unit_dict, param_val_fu
     cb = aux.make_cb(cb_ax, list(param_vals), cmap, "vertical")
     cb.set_label(param_desc)
     cb.ax.set_yticklabels(param_vals)
-

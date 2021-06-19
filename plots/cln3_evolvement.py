@@ -79,3 +79,5 @@ if __name__ == "__main__":
         ax.set_ylim(-0.1, 4.7)
     for ax, name in zip(row_axes[0], names):
         ax.set_ylim(-0.05, 0.85)
+
+    plt.show()
