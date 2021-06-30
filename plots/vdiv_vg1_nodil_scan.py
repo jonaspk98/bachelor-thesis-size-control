@@ -11,8 +11,6 @@ import matplotlib.pyplot as plt
 import auxilary_tools as aux
 from plots.pv_base_plotting import plot_vdiv_y_multi
 
-mpl.use('TkAgg')
-
 if __name__ == "__main__":
     f = 2
     mpl.rc('axes', labelsize=8, titlesize=9, linewidth=0.8 / f, labelpad=4.0 / f, titlepad=6 / f)
@@ -24,7 +22,7 @@ if __name__ == "__main__":
     mpl.rc('legend', frameon=False, fontsize=7, borderpad=0.4 / f, labelspacing=0.5 / f, handlelength=2 / f,
            handleheight=0.7 / f, handletextpad=0.8 / f, borderaxespad=0.5 / f)
     mpl.rc('figure', figsize=(17 / 2.54, 5 / 2.54), dpi=300)
-    sim_set_names = ["kg_vdiv_nodil_nHill_10.pkl", "kg_vdiv_nodil_plain.pkl"]
+    sim_set_names = ["kg_vdiv_nodil_nHill_15_KHill_16.pkl", "kg_vdiv_nodil_plain.pkl"]
     load_fun = aux.get_load_df_fun("simulation_data/transformed_kg_vdiv_scans")
     sim_sets = [load_fun(name) for name in sim_set_names]
     plot_selections = ["SN_cCln3", "SN_cWhi3P", "SN_cWhi5", "SN_cCln12", "SN_Sbf_ac", "V_tot_fl"]
@@ -58,7 +56,7 @@ if __name__ == "__main__":
         ax.set_title("stress-sensing")
 
     for ax in t_in:
-        ax.set_ylim(bottom=0, top=80)
+        ax.set_ylim(bottom=0, top=160)
         ax.set_xticks([15, 30, 45])
         aux.make_grid(ax)
 
@@ -82,4 +80,6 @@ if __name__ == "__main__":
     insets[1].text(-0.13, 1.05, "(b)", transform=insets[1].transAxes, fontsize=12)
 
     # Whi5 conc = 2.5
+
+    plt.savefig(r"C:\Users\jonas\Documents\BA-defense\vdiv_vg1_nodil.pdf", dpi=300, transparent=True, bbox_inches ="tight")
     plt.show()

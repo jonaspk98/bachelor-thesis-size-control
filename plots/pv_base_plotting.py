@@ -37,7 +37,7 @@ def plot_vdiv_tg1_multi(scan_results, ax):
 def plot_vdiv_y_multi(results: pd.DataFrame, df_column: str, ax):
     cmap = mpl.cm.coolwarm
     ax.set_xlabel("volume after division [fL]")
-    ax.set_ylabel("duration of G1 [min]" if df_column == "t_G1" else "volume at START [fL]")
+    ax.set_ylabel("duration of G1 [min]" if df_column == "t_g1" else "volume at START [fL]")
     ax.tick_params()
     for i, data in enumerate(results.iterrows()):
         _, row = data
